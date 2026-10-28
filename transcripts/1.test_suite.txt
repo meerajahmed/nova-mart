@@ -1,0 +1,170 @@
+
+[1m[96m───────────────────────────────────────────────────────[0m
+[1m[96m  Task 2 - Multi-Agent Orchestration[0m
+[1m[96m───────────────────────────────────────────────────────[0m
+  [92m✓ PASS[0m [+5pts] build_inventory_agent() returns an Agent object
+  [92m✓ PASS[0m [+5pts] InventoryAgent has 3 tools (3 found)
+  [92m✓ PASS[0m [+5pts] build_policy_agent() returns an Agent object
+  [92m✓ PASS[0m [+5pts] PolicyAgent has 1 tool (1 found)
+  [92m✓ PASS[0m [+5pts] build_orchestrator_agent() returns an Agent object
+  [92m✓ PASS[0m [+5pts] OrchestratorAgent has 5 routing tools (5 found)
+  [92m✓ PASS[0m [+5pts] OrchestratorAgent uses config.ORCHESTRATOR_MODEL_ID (Claude Haiku 4.5 - correct for routing)
+  [92m✓ PASS[0m [+5pts] Worker agents use config.WORKER_MODEL_ID (Claude Sonnet 4.5 - correct for reasoning)
+  [92m✓ PASS[0m [+0pts] build_policy_agent() runs the retrievers with ThreadPoolExecutor
+
+[1m[96m───────────────────────────────────────────────────────[0m
+[1m[96m  Task 3 - AgentCore Deployment + Guardrails[0m
+[1m[96m───────────────────────────────────────────────────────[0m
+  [92m✓ PASS[0m [+5pts] Guardrail 'udacity-agentcore-guardrail' exists in Bedrock
+  [92m✓ PASS[0m [+5pts] Guardrail content, PII, topic and word policies match the specification
+  [92m✓ PASS[0m [+3pts] Guardrail version 1 is published and READY
+  [92m✓ PASS[0m [+7pts] AgentCore Runtime is READY (PUBLIC / HTTP) with guardrail + KB environment variables
+
+[1m[96m───────────────────────────────────────────────────────[0m
+[1m[96m  Task 4 - Memory[0m
+[1m[96m───────────────────────────────────────────────────────[0m
+  [92m✓ PASS[0m [+5pts] AgentCore Memory udacity_agentcore_memory-ArLZVVEzLr is ACTIVE
+  [92m✓ PASS[0m [+5pts] Memory uses the SESSION_SUMMARY (summaryMemoryStrategy) strategy
+  [92m✓ PASS[0m [+5pts] Memory eventExpiryDuration is 7 days
+
+[1m[96m───────────────────────────────────────────────────────[0m
+[1m[96m  Task 5 - Bedrock Knowledge Bases[0m
+[1m[96m───────────────────────────────────────────────────────[0m
+  [92m✓ PASS[0m [+5pts] RETURNS_KB_ID is set in environment (JMMEPQYTV7)
+  [92m✓ PASS[0m [+0pts] Returns Knowledge Base is ACTIVE
+  [92m✓ PASS[0m [+0pts] Returns KB uses amazon.titan-embed-text-v2:0
+  [92m✓ PASS[0m [+0pts] Returns KB data source has a completed sync
+  [92m✓ PASS[0m [+5pts] SHIPPING_KB_ID is set in environment (WCM129TXFX)
+  [92m✓ PASS[0m [+0pts] Shipping Knowledge Base is ACTIVE
+  [92m✓ PASS[0m [+0pts] Shipping KB uses amazon.titan-embed-text-v2:0
+  [92m✓ PASS[0m [+0pts] Shipping KB data source has a completed sync
+  [92m✓ PASS[0m [+5pts] WARRANTY_KB_ID is set in environment (BABAE8SCW8)
+  [92m✓ PASS[0m [+0pts] Warranty Knowledge Base is ACTIVE
+  [92m✓ PASS[0m [+0pts] Warranty KB uses amazon.titan-embed-text-v2:0
+  [92m✓ PASS[0m [+0pts] Warranty KB data source has a completed sync
+  [92m✓ PASS[0m [+5pts] All three Knowledge Bases return passages for a policy question
+    [PARALLEL RETRIEVAL - START]  Spawning 3 sub-agents concurrently via ThreadPoolExecutor
+    ──────────────────────────────────────────────────────
+    +-- [SUB-AGENT 01]  ReturnsRetriever   KB-ID: JMMEPQYTV7
+    +-- [SUB-AGENT 02]  ShippingRetriever  KB-ID: WCM129TXFX
+    +-- [SUB-AGENT 03]  WarrantyRetriever  KB-ID: BABAE8SCW8
+    Retrieving in parallel... (sub-agent output suppressed - clean results printed sequentially after [END])
+
+Tool #1: retrieve_shipping_policy
+
+Tool #1: retrieve_returns_policy
+
+Tool #1: retrieve_warranty_policy
+Here are the relevant passages from the Returns Policy knowledge base:
+
+**Passage 1** (Score: 0.666)
+From: customer_tiers.txt
+
+NovaMart Customer Tier Program - Last Updated: January 2025
+
+**PREMIUM TIER Benefits:**
+- Extended **60-day return window**
+- Free expedited shipping on allBased orders
+- ** on the retrieved passages3-year warranty on electronics** from
+- Priority customer support: response within  the4 hours
+- Early access toHere sales and new product launches
+- Warranty Policy knowledge base:
+
+**Passage 1** are the relevant Dedicated account manager for orders over $500 (Score: 0.693) passages retrieved
+
+**STANDARD TIER:** - From from
+-  customer30-day return window
+- Standard the_ Shipping Policy knowledge base:
+
+** shipping rates apply
+- 1-tiers.txt:
+StatesPassage 1 |year warranty on electronics
+- Standard customer that support response time: 24-48 Score: 0.712** Premium hours
+
+---
+NovaMart Customer Tier Program  tier
+
+**Passage 2** ( customers receiveScore: 0.663)================================ Last Updated: January 2:
+From: return_policy.txt025  TIER OVERVIEW Nov
+- Extended
+
+**aMart offers two customer tiers: **STANDARD RETURN WINDOW** Standard and Premium.  STANDARD60-day return window**
+Customers may return most items within TIER - Default tier for all new customers
+- ** 30 days of delivery for a - 30-day return window -3 full refund. Standard shipping rates apply - 1--year warranty on electronics** **year warranty on electronics - Standard customer support
+
+**Passage 2** (ScorePremium tier customers receive an extended 60 response time: 24-48 : 0.657) - From-day return window.**
+
+---hours  PREMIUM TIER Requirements: warranty_policy.txt:
+
+**Passage 3** ( Spend $500+ in a calendar
+ConfirmsScore: 0.624) year OR place 20+ orders in that
+From: return_policy.txt a calendar year. Benefits: - Extended Premium tier customers receive an
+
+Additional 60-day return window - Free automatic ** return expedited shipping on all orders - 3-year warranty on all Electronics**. process3-year warranty on electronics - Priority details including customer support: response within 4  refund methods andhours - Early access to sales and new damaged/defective item product launches - Dedicated account manager for procedures. orders over $500  HOW TO UPGRADE Customers are automatically upgraded to Premium when they meet the spending or order threshold. An email notification is sent upon upgrade. Tier status is evaluated on a rolling 12-month basis.  TIER DOWNGRADE If a customer falls below the Premium threshold for 12 consecutive months, they will be moved back to Standard tier with 30 days notice.
+Source: s3://udacity-agentcore-policy-docs-080116300042-ce080610/policies/shipping/customer_tiers.txt
+
+**Passage 2 | Score: 0.589**
+NovaMart Shipping Policy ========================= Last Updated: January 2025  DOMESTIC SHIPPING OPTIONS Standard Shipping (5-7 business days): Free on orders over $50, $4.99 otherwise Expedited Shipping (2-3 business days): $9.99 Overnight Shipping (next business day): $24.99 Same-Day Delivery (select metros): $14.99  INTERNATIONAL SHIPPING We ship to over 50 countries. International shipping rates and delivery times vary by destination. Import duties and taxes are the responsibility of the recipient. Estimated delivery: 7-21 business days depending on destination.  ORDER PROCESSING Orders placed before 2:00 PM EST on business days are processed same day. Orders placed after 2:00 PM EST or on weekends are processed the next business day. Orders are not processed on federal holidays.  TRACKING A tracking number is emailed within 24 hours of shipment. Track your order at novamart.example.com/track or via the carrier's website.  DELIVERY ISSUES Lost packages: File a claim within 30 days of expected delivery date. Wrong address: Contact support immediately. Address changes after dispatch may incur fees. Missed delivery: The carrier will attempt delivery up to 3 times before holding at facility.  PREMIUM MEMBER BENEFITS Premium tier customers receive free expedited shipping on all orders.
+Source: s3://udacity-agentcore-policy-docs-080116300042-ce080610/policies/shipping/shipping_policy.txt    ──────────────────────────────────────────────────────
+    [PARALLEL RETRIEVAL - END]  All 3 KBs responded  Elapsed: 11.1s
+
+    [SUB-AGENT 01]  ReturnsRetriever   KB: JMMEPQYTV7
+      | Here are the relevant passages from the Returns Policy knowledge base:
+      | **Passage 1** (Score: 0.666)
+      | From: customer_tiers.txt
+      | NovaMart Customer Tier Program - Last Updated: January 2025
+      | **PREMIUM TIER Benefits:**
+      | - Extended **60-day return window**
+      | - Free expedited shipping on all orders
+      | - **3-year warranty on electronics**
+      | - Priority customer support: response within 4 hours
+      | - Early access to sales and new product launches
+      | - Dedicated account manager for orders over $500
+      | **STANDARD TIER:**
+      | - 30-day return window
+      | - Standard shipping rates apply
+      | - 1-year warranty on electronics
+      | - Standard customer support response time: 24-48 hours
+      | ---
+      | **Passage 2** (Score: 0.663)
+      | From: return_policy.txt
+      | **STANDARD RETURN WINDOW**
+      | Customers may return most items within 30 days of delivery for a full refund. **Premium tier customers receive an extended 60-day return window.**
+      | ---
+      | **Passage 3** (Score: 0.624)
+      | From: return_policy.txt
+      | Additional return process details including refund methods and damaged/defective item procedures.
+
+    [SUB-AGENT 02]  ShippingRetriever  KB: WCM129TXFX
+      | Here are the relevant passages retrieved from the Shipping Policy knowledge base:
+      | **Passage 1 | Score: 0.712**
+      | NovaMart Customer Tier Program ================================ Last Updated: January 2025  TIER OVERVIEW NovaMart offers two customer tiers: Standard and Premium.  STANDARD TIER - Default tier for all new customers - 30-day return window - Standard shipping rates apply - 1-year warranty on electronics - Standard customer support response time: 24-48 hours  PREMIUM TIER Requirements: Spend $500+ in a calendar year OR place 20+ orders in a calendar year. Benefits: - Extended 60-day return window - Free expedited shipping on all orders - 3-year warranty on electronics - Priority customer support: response within 4 hours - Early access to sales and new product launches - Dedicated account manager for orders over $500  HOW TO UPGRADE Customers are automatically upgraded to Premium when they meet the spending or order threshold. An email notification is sent upon upgrade. Tier status is evaluated on a rolling 12-month basis.  TIER DOWNGRADE If a customer falls below the Premium threshold for 12 consecutive months, they will be moved back to Standard tier with 30 days notice.
+      | Source: s3://udacity-agentcore-policy-docs-080116300042-ce080610/policies/shipping/customer_tiers.txt
+      | **Passage 2 | Score: 0.589**
+      | NovaMart Shipping Policy ========================= Last Updated: January 2025  DOMESTIC SHIPPING OPTIONS Standard Shipping (5-7 business days): Free on orders over $50, $4.99 otherwise Expedited Shipping (2-3 business days): $9.99 Overnight Shipping (next business day): $24.99 Same-Day Delivery (select metros): $14.99  INTERNATIONAL SHIPPING We ship to over 50 countries. International shipping rates and delivery times vary by destination. Import duties and taxes are the responsibility of the recipient. Estimated delivery: 7-21 business days depending on destination.  ORDER PROCESSING Orders placed before 2:00 PM EST on business days are processed same day. Orders placed after 2:00 PM EST or on weekends are processed the next business day. Orders are not processed on federal holidays.  TRACKING A tracking number is emailed within 24 hours of shipment. Track your order at novamart.example.com/track or via the carrier's website.  DELIVERY ISSUES Lost packages: File a claim within 30 days of expected delivery date. Wrong address: Contact support immediately. Address changes after dispatch may incur fees. Missed delivery: The carrier will attempt delivery up to 3 times before holding at facility.  PREMIUM MEMBER BENEFITS Premium tier customers receive free expedited shipping on all orders.
+      | Source: s3://udacity-agentcore-policy-docs-080116300042-ce080610/policies/shipping/shipping_policy.txt
+
+    [SUB-AGENT 03]  WarrantyRetriever  KB: BABAE8SCW8
+      | Based on the retrieved passages from the Warranty Policy knowledge base:
+      | **Passage 1** (Score: 0.693) - From customer_tiers.txt:
+      | States that Premium tier customers receive:
+      | - Extended **60-day return window**
+      | - **3-year warranty on electronics**
+      | **Passage 2** (Score: 0.657) - From warranty_policy.txt:
+      | Confirms that Premium tier customers receive an automatic **3-year warranty on all Electronics**.
+  [92m✓ PASS[0m [+5pts] search_all_policies() returned combined results from the three retrievers (11.1s)
+
+[1m[96m───────────────────────────────────────────────────────[0m
+[1m[96m  Task 6 - Observability[0m
+[1m[96m───────────────────────────────────────────────────────[0m
+  [92m✓ PASS[0m [+10pts] CloudWatch logging enabled at INFO level → /aws/bedrock/agentcore/udacity-agentcore
+  [96mℹ INFO[0m latest agent log stream: local/ADMINIT01/2026-10-27/f6497631 (841 min ago)
+  [92m✓ PASS[0m [+10pts] X-Ray tracing enabled: 100% sampling, Transaction Search → CloudWatch Logs (ACTIVE)
+  [96mℹ INFO[0m no NovaMart traces in X-Ray yet - run `python src/agent_orchestrator.py test` (or `invoke`) and wait ~60 s
+
+═══════════════════════════════════════════════════════
+  [1mScore: [92m120/120 pts (100%)[0m
+═══════════════════════════════════════════════════════
+
+  [92m[1m🎉 Perfect score! All tasks complete.[0m
+
